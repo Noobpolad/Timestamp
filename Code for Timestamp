@@ -1,0 +1,150 @@
+#include <iostream>
+
+using namespace std;
+
+void dateAndTimeCalculation();
+
+int main(){
+
+    dateAndTimeCalculation();
+
+    return 0;
+}
+// 1 year =  31 536 000
+// 1 month = 2 592 000
+// 1 day = 86 400
+// 1 hour = 3 600
+// 1 minute = 60
+void dateAndTimeCalculation(){
+
+    //Variables declaration
+    long long year;
+    bool leapYear = false;
+    long month;
+    long day;
+    int addYears;
+    int addDays;
+    int addMonth;
+    int hour;
+    int minute;
+    int second;
+    long long userInput;
+    cout << "Put the number in seconds:";
+    cin >> userInput;
+
+    //Calculations
+    year = userInput/31536000;
+    userInput = userInput % 31536000;
+    month = userInput / 2592000;
+    userInput = userInput % 2592000;
+    day = (userInput / 86400);
+    userInput = userInput % 86400;
+    hour = userInput / 3600;
+    userInput = userInput % 3600;
+    minute = userInput / 60;
+    userInput = userInput % 60;
+
+    //Leap year calculation
+      if(year % 4 == 0) {
+        if(year % 100 == 0) {
+            if(year % 400 == 0) {
+                leapYear = true;
+            }
+        } else{
+             leapYear = true;
+        }
+    }
+
+    //Calculation of additional days, caused by leap years
+    if(year < 100){
+        addDays = year / 4;
+    }
+
+    else if(year >= 100){
+        if(year % 100 != 0){
+            addDays = year / 4;
+        }
+        else if(year % 100 == 0 && year % 400 == 0){
+            year=year/100;
+            addDays=addDays+year;
+        }
+    }
+
+    //Days limitation and month changing
+        if(month==1&&day+addDays>31){
+            addMonth=addDays/31;
+            month=month+addMonth;
+            day=addDays%31+1;
+        }
+        else if (leapYear=true&&month==2&&day+addDays>29){
+            addMonth=addDays/31;
+            month=month+addMonth;
+            day=addDays%29+1;
+        }
+        else if(leapYear=false&&month==2&&day+addDays>28){
+            addMonth=addDays/31;
+            month=month+addMonth;
+            day=addDays%28+1;
+        }
+        else if (month==3&&day+addDays>31){
+            addMonth=addDays/31;
+            month=month+addMonth;
+            day=addDays%31+1;
+        }
+        else if (month==4&&day+addDays>30){
+            addMonth=addDays/31;
+            month=month+addMonth;
+            day=addDays%30+1;
+        }
+        else if (month==5&&day+addDays>31){
+            addMonth=addDays/31;
+            month=month+addMonth;
+            day=addDays%31+1;
+        }
+        else if (month==6&&day+addDays>30){
+            addMonth=addDays/31;
+            month=month+addMonth;
+            day=addDays%30+1;
+        }
+        else if (month==7&&day+addDays>31){
+            addMonth=addDays/31;
+            month=month+addMonth;
+            day=addDays%31+1;
+        }
+        else if (month==8&&day+addDays>31){
+            addMonth=addDays/31;
+            month=month+addMonth;
+            day=addDays%31+1;
+        }
+        else if (month==9&&day+addDays>30){
+            addMonth=addDays/31;
+            month=month+addMonth;
+            day=addDays%30+1;
+        }
+        else if (month==10&&day+addDays>31){
+            addMonth=addDays/31;
+            month=month+addMonth;
+            day=addDays%31+1;
+        }
+        else if (month==11&&day+addDays>30){
+            addMonth=addDays/31;
+            month=month+addMonth;
+            day=addDays%30+1;
+        }
+        else if (month==12&&day+addDays>31){
+            addMonth=addDays/31;
+            month=0+addMonth;
+            day=addDays%31+1;
+        }
+
+
+        if(month>12){
+            addYears=addMonth/12;
+            year=year+addYears;
+            month=addMonth%12+1;
+        }
+
+     cout<<year<<"-"<<month<<"-"<<day<<"  "<<hour<<":"<<minute<<":"<<userInput<<endl<<endl;
+     cout<<"Total number of additional days (Leap year):"<<addDays;
+
+}
